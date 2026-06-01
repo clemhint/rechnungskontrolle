@@ -188,6 +188,15 @@ input[type=number]:focus {
   background: #2158a5;
   color: #fff;
 }
+.btn-clear {
+  color: #bacfd9;
+  border-color: #bacfd9;
+}
+.btn-clear:hover {
+  background: #bacfd9;
+  color: #fff;
+  border-color: #bacfd9;
+}
 
 .result-val {
   font-family: 'BasierSquareMono', monospace;
@@ -261,8 +270,9 @@ input[type=number]:focus {
           <div class="unit">€</div>
         </div>
         <div class="row" style="border-bottom:none;padding-bottom:0">
-          <div style="grid-column:1/-1;">
+          <div style="grid-column:1/-1;display:flex;gap:10px;">
             <button class="btn" onclick="calcM1()">Berechnen</button>
+            <button class="btn btn-clear" onclick="clearM1()">Felder leeren</button>
           </div>
         </div>
         <div id="m1_hero" style="display:none" class="row">
@@ -316,8 +326,9 @@ input[type=number]:focus {
           <div class="unit">%</div>
         </div>
         <div class="row" style="border-bottom:none;padding-bottom:0">
-          <div style="grid-column:1/-1;">
+          <div style="grid-column:1/-1;display:flex;gap:10px;">
             <button class="btn" onclick="calcM2()">Berechnen</button>
+            <button class="btn btn-clear" onclick="clearM2()">Felder leeren</button>
           </div>
         </div>
         <div id="m2_steps" style="display:none">
@@ -356,6 +367,17 @@ input[type=number]:focus {
 
 <script>
 function n(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+function clearM1() {
+  ['m1_aep_reg','m1_aep_tats'].forEach(function(id){ document.getElementById(id).value = ''; });
+  document.getElementById('m1_hero').style.display = 'none';
+  document.getElementById('m1_diff_row').style.display = 'none';
+}
+
+function clearM2() {
+  ['m2_aep_reg','m2_rabatt','m2_sonder','m2_skonto'].forEach(function(id){ document.getElementById(id).value = ''; });
+  document.getElementById('m2_steps').style.display = 'none';
+}
 
 function calcM1() {
   var reg = n('m1_aep_reg');
